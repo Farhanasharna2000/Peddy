@@ -20,9 +20,8 @@
             extend: {
               colors: {
                 primary: '#0E7A81',
-                secondary: 'rgb(17, 17, 17)',
+                secondary: 'rgba(255, 255, 255, 0.05)',
                 secondary2: 'rgba(17, 17, 17, 0.7)',
-                body: '#F9F7F3',
               },
               fontFamily: {
                 Lato: 'Lato',
@@ -31,9 +30,17 @@
           },
         }
       </script>
+<style>
+    /* .category{
+        width:66% ;
+        height: 120px;
+    } */
+    
+</style>
+      
 </head>
-<body class="w-11/12 mx-auto Lato">
-    <header>
+<body class=" Lato">
+    <header class="w-11/12 mx-auto">
         <div class="navbar bg-base-100">
             <div class="navbar-start flex items-center gap-2">
                 <img src="images/logo.webp" alt="">
@@ -52,25 +59,27 @@
           </div>
     </header>
     <!-- banner section -->
-    <div class="hero  ">
-        <div class="hero-content text-center">
-          <div class="w-8/12 mx-auto">
-            <h2 class="text-gray-500 font-semibold text-base mb-7">Bringing Families Together ❤️‍🔥 </h2>
-            <h1 class="text-5xl font-bold">
-                Your Path to Adoption Starts Here</h1>
-            <p class="py-6 text-sm font-semibold">
-                It is the process by which organisms adjust to their environment. It involves changes in physical traits, behaviors, or physiological processes over time.
-            </p>
-            <button class="btn text-white bg-primary ">View More</button>
+    <section class="w-11/12 mx-auto">
+        <div class="hero  ">
+            <div class="hero-content text-center">
+              <div class="w-8/12 mx-auto">
+                <h2 class="text-gray-500 font-semibold text-base mb-7">Bringing Families Together ❤️‍🔥 </h2>
+                <h1 class="text-5xl font-bold">
+                    Your Path to Adoption Starts Here</h1>
+                <p class="py-6 text-sm font-semibold">
+                    It is the process by which organisms adjust to their environment. It involves changes in physical traits, behaviors, or physiological processes over time.
+                </p>
+                <button class="btn text-white bg-primary ">View More</button>
+              </div>
+            </div>
+           
           </div>
+          <div class="flex justify-center items-center">
+            <img  src="images/pet.webp" alt="">
         </div>
-       
-      </div>
-      <div class="flex justify-center items-center">
-        <img  src="images/pet.webp" alt="">
-    </div>
+    </section>
 
-    <main>
+    <main class="w-11/12 mx-auto">
         <!-- adopt section  -->
         <section class="w-8/12 mx-auto text-center">
             <h1 class="text-2xl font-bold">
@@ -79,7 +88,78 @@
                 This process occurs over generations through natural selection, where beneficial traits that enhance survival and reproduction become more common within a population. 
             </p>
         </section> 
+        <!-- category section -->
+         <section class="mb-10 grid grid-cols-2 lg:grid-cols-4 gap-8 ">
+
+            <button class="btn category bg-white ">
+                <img class="w-8" src="images/Dogs.png" alt="">
+                <p class="text-lg font-bold">Dogs</p>
+            </button>
+            <button class="btn category bg-white ">
+                <img class="w-8" src="images/Cats.png" alt="">
+                <p class="text-lg font-bold">Cats</p>
+            </button>
+            <button class="btn category bg-white ">
+                <img class="w-8" src="images/Rabbits.png" alt="">
+                <p class="text-lg font-bold">Rabbits</p>
+            </button>
+            <button id="" class=" btn category bg-white ">
+                <img class="w-8" src="images/Birds.png" alt="">
+                <p class="text-lg font-bold">Birds</p>
+            </button>
+            
+         </section>
+         <!-- sort section  -->
+          <section class="flex justify-between items-center mb-8">
+            <h2 class="text-lg font-bold">Best Deal For you</h2>
+            <button class="btn  text-white bg-primary">Sort by Price</button>
+
+          </section>
     </main>
+    <footer class=" bg-black ">
+        <div class="w-11/12 mx-auto grid grid-cols-3 py-10 ">
+            <div class="pr-8">
+                <div class="navbar-start flex items-center gap-2 mb-4">
+                    <img src="images/logo.webp" alt="">
+                  <a class="font-bold text-xl text-white">Peddy</a>
+                </div> 
+                <div class="text-white text-sm lg:text-base">
+                    <p class="my-2">Location: av. Washington 165, NY CA </p> 
+                    <p class="my-2">54003 </p> 
+                    <p class="my-2">Email: info@yourdomain.com </p> 
+                    <p class="my-2">Openings hours: 9.00 AM - 5.00 PM </p> 
+                </div>
+                <div class="flex items-center gap-2">
+        <img class="w-6" src="images/facebook.png" alt="">
+        <img class="w-6" src="images/twitter.png" alt="">
+        <img class="w-6" src="images/utube.png" alt="">
+        <img class="w-6" src="images/instagram.png" alt="">
+        
+                </div>
+            </div>
+            <div class="flex flex-col text-white text-sm lg:text-base">
+                <h6 class="mb-4 ">Useful Links</h6>
+                <a class="link link-hover">Home</a>
+                <a class="link link-hover">About Us</a>
+                <a class="link link-hover">Animals</a>
+                <a class="link link-hover">Foundation</a>
+                <a class="link link-hover">Contact</a>
+            </div>
+              <div >
+                <h6 class="mb-4 text-white text-sm lg:text-base">Drop a Message</h6>
+                <fieldset class="form-control ">
+                  
+                    <input
+                      type="text"
+                      placeholder="Enter your email"
+                      class="input input-bordered bg-secondary mb-4 w-full sm:w-auto" />
+                    <button class="btn bg-primary border-none text-white w-full sm:w-auto">Subscribe</button>
+                </fieldset>
+            </div>
+        </div>
+    </footer>
+    
+    
     <script src="./js/index.js"></script>
 </body>
 </html>
