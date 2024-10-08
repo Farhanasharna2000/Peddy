@@ -118,7 +118,7 @@ const displayAllPets = (petsArray) => {
     div.innerHTML = `
         <div class="card border">
           <div class="p-5">
-            <img class="rounded-lg w-full" src="${image}" alt="">
+            <img class="rounded-lg w-full object-cover" src="${image}" alt="">
             <div class="space-y-3">
               <h2 class="text-base font-bold mt-3">${pet_name ? pet_name : 'No data found'}</h2>
               <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame.png" alt="">Breed: ${breed ? breed : 'Not available'}</p>
@@ -159,7 +159,7 @@ const showLikeContent = (image) => {
   div.classList.add('lg:w-5/12', 'w-full', 'float-left', 'mb-3', 'lg:m-2')
   div.innerHTML = `
         
-          <img src="${image}" alt="" class="rounded-lg border p-2">
+          <img src="${image}" alt="" class="rounded-lg border p-2 w-full object-cover">
           
       `;
   emptyEl.appendChild(div);
@@ -178,7 +178,7 @@ const displayDetails = (petData) => {
   const { pet_name, breed, date_of_birth, gender, price, vaccinated_status, pet_details, image } = petData;
 
   modalContent.innerHTML = `
-  <img class="rounded-lg w-full" src="${image}" alt="">
+  <img class="rounded-lg w-full object-cover" src="${image}" alt="">
       <div class="space-y-3">
         <h2 class="text-2xl font-bold mt-3">${pet_name ? pet_name : 'No data found'}</h2>
         <div class="flex gap-10">
