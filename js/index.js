@@ -1,5 +1,9 @@
 const spinnerEl = document.getElementById('spinner');
+const spinnerEl1 = document.getElementById('card-container');
 spinnerEl.classList.remove('hidden');
+
+const emptyEl = document.getElementById('empty');
+emptyEl.classList.add('hidden');
 
 
 const categoryBtnHandle = async () => {
@@ -44,6 +48,8 @@ const displayCategoryBtn = (buttons) => {
 
 
 const loadCategory = async (category) => {
+  emptyEl.classList.add('hidden');
+  spinnerEl1.classList.add('hidden');
   spinnerEl.classList.remove('hidden');
 
   setTimeout(async () => {
@@ -51,36 +57,54 @@ const loadCategory = async (category) => {
     try {
       const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`);
       const data = await res.json();
-      displayAllPets(data.data);
+      categoryPets = data.data;
 
+      displayAllPets(data.data);
     } 
     catch (error) {
       console.error('Error fetching data:', error);
     }
+  emptyEl.classList.remove('hidden');
+
     spinnerEl.classList.add('hidden');
+    spinnerEl1.classList.remove('hidden');
   }, 2000);
 };
 
 
+let pets = []; // Declare a global variable to hold the pets data
+let categoryPets= [];
+
+
+
+// Load the pets data
 const loadCardInfo = async () => {
   setTimeout(async () => {
-    const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets')
-    const data = await res.json()
-    displayAllPets(data.pets);
+    const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
+    const data = await res.json();
+    pets = data.pets; // Store the pets data in the global variable
+
+    // Display pets initially
+    displayAllPets(pets);
+
+    // Show spinner or empty elements if needed
+    emptyEl.classList.remove('hidden');
+    spinnerEl1.classList.remove('hidden');
     spinnerEl.classList.add('hidden');
-
   }, 2000);
-}
+};
 
-loadCardInfo()
+// Call the function to load the pets data
+loadCardInfo();
 
-const displayAllPets = (pets) => {
+// Display pets in the card container
+const displayAllPets = (petsArray) => {
   const cardContainer = document.getElementById('card-container');
   cardContainer.innerHTML = '';
 
-  if (pets.length === 0) {
+  if (petsArray.length === 0) {
     cardContainer.classList.remove("grid");
-  cardContainer.innerHTML = '';
+    cardContainer.innerHTML = '';
 
     cardContainer.innerHTML = `
         <div class="min-h-[300px] w-full flex flex-col justify-center items-center gap-5 border rounded-2xl bg-gray-100">
@@ -93,9 +117,8 @@ const displayAllPets = (pets) => {
     cardContainer.classList.add("grid");
   }
 
-  pets.forEach(pet => {
-    console.log(pet);
-
+  // Create and display cards for each pet
+  petsArray.forEach(pet => {
     const { pet_name, gender, image, price, date_of_birth, breed, petId } = pet;
     const div = document.createElement('div');
     div.innerHTML = `
@@ -107,23 +130,34 @@ const displayAllPets = (pets) => {
               <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame.png" alt="">Breed: ${breed ? breed : 'Not available'}</p>
               <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame (1).png" alt="">Birth: ${date_of_birth ? date_of_birth : 'No data found'}</p>
               <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame (2).png" alt="">Gender: ${gender ? gender : 'No data found'}</p>
-              <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame (3).png" alt="">Price: ${price ? price : 'No data found'}</p>
+              <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame (3).png" alt="">Price: ${price ? price : 'No price found'}</p>
             </div>
             <hr class="my-2"/>
             <div class="flex gap-3">
               <button  class="btn text-primary bg-white" onclick="showLikeContent('${image}')">
                 <img src="images/like.png" alt="">
               </button>
-              <button onclick="adoptBtn()"  class="btn text-primary bg-white">Adopt</button>
-              <button id="details-btn" onclick="loadDetails('${petId}')" class="btn text-primary bg-white detail-btn">Details</button>
+              <button id="adopt-btn" onclick="adoptBtn(this)"  class="btn text-primary bg-white">Adopt</button>
+              <button id="details-btn" onclick="loadDetails('${petId}', this)" class="btn text-primary bg-white detail-btn">Details</button>
             </div>
-            
           </div>
         </div>
       `;
     cardContainer.appendChild(div);
   });
 };
+
+const sortPetsByPrice = () => {
+
+  const petsToSort = categoryPets.length ? categoryPets : pets;
+  console.log(petsToSort);
+
+  petsToSort.sort((a, b) => a.price - b.price); 
+  
+  displayAllPets(petsToSort); 
+};
+
+
 
 
 
@@ -142,13 +176,16 @@ const showLikeContent = (image) => {
 }
 
 // Function to show the details content on button click
-const loadDetails = async (petId) => {
-  const res = await fetch(` https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
-  const data = await res.json()
-   displayDetails(data.petData);
-   
-  
-}
+const loadDetails = async (petId, button) => {
+  const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`);
+  const data = await res.json();
+  displayDetails(data.petData);
+  console.log(data);
+
+  const allDetailButtons = document.querySelectorAll('.detail-btn');
+  allDetailButtons.forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+};
 
 const displayDetails = (petData) => {
   const modalContent = document.getElementById('modal-content');
@@ -182,7 +219,8 @@ const displayDetails = (petData) => {
   
 } 
 
-const adoptBtn = () => {
+const adoptBtn = (button) => {
+
   const modalAdoptContent = document.getElementById('modal-adopt-content');
   let countdown = 3; 
 
@@ -203,10 +241,13 @@ const adoptBtn = () => {
     countdown--; 
     document.getElementById('countdown').textContent = countdown; 
     if (countdown === 0) {
-     
       clearInterval(intervalId);
       document.getElementById('my_modal_2').close();
-    
+
+      button.disabled = true; 
     }
   }, 1000); 
 };
+
+
+
