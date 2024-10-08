@@ -146,7 +146,7 @@ const sortPetsByPrice = () => {
   const petsToSort = categoryPets.length ? categoryPets : pets;
   console.log(petsToSort);
 
-  petsToSort.sort((a, b) => a.price - b.price);
+  petsToSort.sort((a, b) => b.price - a.price);
 
   displayAllPets(petsToSort);
 };
