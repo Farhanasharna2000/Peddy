@@ -118,7 +118,7 @@ const displayAllPets = (petsArray) => {
     div.innerHTML = `
         <div class="card border">
           <div class="p-5">
-            <img class="rounded-lg" src="${image}" alt="">
+            <img class="rounded-lg w-full" src="${image}" alt="">
             <div class="space-y-3">
               <h2 class="text-base font-bold mt-3">${pet_name ? pet_name : 'No data found'}</h2>
               <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame.png" alt="">Breed: ${breed ? breed : 'Not available'}</p>
