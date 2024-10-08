@@ -24,7 +24,6 @@ const displayCategoryBtn = (buttons) => {
   categoryBtnContainer.innerHTML = '';
 
   buttons.forEach(button => {
-    console.log(button);
     const { category, category_icon, id } = button;
 
     const div = document.createElement('div');
@@ -156,7 +155,7 @@ const sortPetsByPrice = () => {
 const showLikeContent = (image) => {
   const emptyEl = document.getElementById('empty');
   const div = document.createElement('div');
-  div.classList.add('lg:w-5/12', 'w-full', 'float-left', 'mb-3','lg:m-2.5')
+  div.classList.add('lg:w-5/12', 'w-full', 'float-left', 'mb-3', 'lg:m-2.5')
   div.innerHTML = `
         
           <img src="${image}" alt="" class="rounded-lg border p-2 w-full object-cover">
