@@ -30,3 +30,5 @@ Peddy is a user-friendly pet adoption platform that connects prospective pet own
 
 ### 5. **Live link to the deployed project:**
 
+https://assignment-6-peddy.netlify.app/
+
