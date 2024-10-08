@@ -29,8 +29,8 @@ const displayCategoryBtn = (buttons) => {
     const div = document.createElement('div');
     div.innerHTML = `
         <button id="button-${id}" onclick="loadCategory('${category}')" class="btn bg-white category-btn ">
-          <img class="w-8" src="${category_icon}" alt="">
-          <p class="text-lg font-bold">${category}</p>
+          <img class="lg:w-8 w-4" src="${category_icon}" alt="">
+          <p class="lg:text-lg text-sm font-bold">${category}</p>
         </button>
       `;
 
@@ -72,32 +72,27 @@ const loadCategory = async (category) => {
 };
 
 
-let pets = []; // Declare a global variable to hold the pets data
+let pets = [];
 let categoryPets= [];
 
 
 
-// Load the pets data
 const loadCardInfo = async () => {
   setTimeout(async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
     const data = await res.json();
-    pets = data.pets; // Store the pets data in the global variable
+    pets = data.pets; 
 
-    // Display pets initially
     displayAllPets(pets);
 
-    // Show spinner or empty elements if needed
     emptyEl.classList.remove('hidden');
     spinnerEl1.classList.remove('hidden');
     spinnerEl.classList.add('hidden');
   }, 2000);
 };
 
-// Call the function to load the pets data
 loadCardInfo();
 
-// Display pets in the card container
 const displayAllPets = (petsArray) => {
   const cardContainer = document.getElementById('card-container');
   cardContainer.innerHTML = '';
@@ -117,7 +112,6 @@ const displayAllPets = (petsArray) => {
     cardContainer.classList.add("grid");
   }
 
-  // Create and display cards for each pet
   petsArray.forEach(pet => {
     const { pet_name, gender, image, price, date_of_birth, breed, petId } = pet;
     const div = document.createElement('div');
@@ -159,14 +153,10 @@ const sortPetsByPrice = () => {
 
 
 
-
-
-// Function to show the like content on button click
-
 const showLikeContent = (image) => {
   const emptyEl = document.getElementById('empty');
   const div = document.createElement('div');
-  div.classList.add('w-5/12', 'float-left', 'm-2')
+  div.classList.add('lg:w-5/12','w-full','float-left','mb-3' ,'lg:m-2')
   div.innerHTML = `
         
           <img src="${image}" alt="" class="rounded-lg">
