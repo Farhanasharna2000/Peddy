@@ -5,21 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Peddy</title>
+
   <!-- daisyUI cdn -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- google font cdn -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
     rel="stylesheet">
+
   <!-- font awsome cdn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <!-- link css  -->
   <link rel="stylesheet" href="styles/style.css">
+  
   <script>
     tailwind.config = {
       theme: {
@@ -36,16 +41,10 @@
       },
     }
   </script>
-  <style>
-    /* .category{
-        width:66% ;
-        height: 120px;
-    } */
-  </style>
-
+ 
 </head>
 
-<body class=" Lato">
+<body class="Lato">
   <header class="w-11/12 mx-auto">
     <div class="navbar ">
       <div class="navbar-start flex items-center gap-2">
@@ -78,6 +77,7 @@
       </div>
     </div>
   </header>
+
   <!-- banner section -->
   <section class="w-11/12 mx-auto">
     <div class="hero  ">
@@ -93,7 +93,6 @@
           <a href="#adopt-container" class="btn text-white !bg-primary ">View More</a>
         </div>
       </div>
-
     </div>
     <div class="flex justify-center items-center">
       <img src="images/pet.webp" alt="">
@@ -101,6 +100,7 @@
   </section>
 
   <main class="w-11/12 mx-auto">
+
     <!-- adopt section  -->
     <section id="adopt-container" class="lg:w-8/12 mx-auto text-center">
       <h1 class="text-2xl font-bold">
@@ -110,11 +110,14 @@
         and reproduction become more common within a population.
       </p>
     </section>
+
     <!-- category section -->
     <section id="category-btn" class="mb-10  flex justify-between gap-3">
 
 
     </section>
+
+    <!-- spinner  -->
     <div id="spinner" class="text-center hidden">
       <span class="loading loading-bars loading-md "></span>
     </div>
@@ -124,11 +127,12 @@
     <section class="flex justify-between items-center mb-8 ">
       <h2 class="text-lg font-bold">Best Deal For you</h2>
       <button onclick="sortPetsByPrice()" id="sortBtn" class="btn  text-white bg-primary">Sort by Price</button>
-      
     </section>
+
+
     <!-- card section -->
     <section class="pb-16 flex gap-4">
-      
+
       <div id="card-container" class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-9/12">
 
       </div>
@@ -139,36 +143,36 @@
 
       <!-- modal-1  -->
 
-      <!-- Open the modal using ID.showModal() method -->
-<button hidden class="btn" onclick="my_modal_2.showModal()">open modal</button>
-<dialog id="my_modal_2" class="modal">
-  <div class="modal-box">
-    <div id="modal-adopt-content">
-     
-    </div>
-   
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
-</dialog>
-<!-- modal-2  -->
+      <button hidden class="btn" onclick="my_modal_2.showModal()">open modal</button>
+      <dialog id="my_modal_2" class="modal">
+        <div class="modal-box">
+          <div id="modal-adopt-content">
+
+          </div>
+
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
+      <!-- modal-2  -->
       <button id="shoowModalData" class="btn hidden" onclick="customModal.showModal()">open modal</button>
       <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box">
-    <div id="modal-content">
-    
-   
-  </div>
-  <div class="modal-action">
-    <form method="dialog">
-      <!-- if there is a button in form, it will close the modal -->
-      <button class="btn">Close</button>
-    </form>
-  </div>
-</dialog>
+        <div class="modal-box">
+          <div id="modal-content">
+
+
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+            </form>
+          </div>
+      </dialog>
     </section>
   </main>
+
   <footer class=" bg-black ">
     <div class="w-11/12 mx-auto grid grid-cols-3 py-10 ">
       <div class="pr-8">
@@ -212,6 +216,7 @@
 
 
   <script src="./js/index.js"></script>
+  
 </body>
 
 </html>

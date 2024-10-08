@@ -5,6 +5,8 @@ spinnerEl.classList.remove('hidden');
 const emptyEl = document.getElementById('empty');
 emptyEl.classList.add('hidden');
 
+let pets = [];
+let categoryPets = [];
 
 const categoryBtnHandle = async () => {
   setTimeout(async () => {
@@ -12,11 +14,10 @@ const categoryBtnHandle = async () => {
     const data = await res.json()
 
     displayCategoryBtn(data.categories);
+
   }, 2000);
-
-
 }
-categoryBtnHandle()
+categoryBtnHandle();
 
 const displayCategoryBtn = (buttons) => {
   const categoryBtnContainer = document.getElementById("category-btn");
@@ -48,6 +49,7 @@ const displayCategoryBtn = (buttons) => {
 
 
 const loadCategory = async (category) => {
+
   emptyEl.classList.add('hidden');
   spinnerEl1.classList.add('hidden');
   spinnerEl.classList.remove('hidden');
@@ -60,34 +62,31 @@ const loadCategory = async (category) => {
       categoryPets = data.data;
 
       displayAllPets(data.data);
-    } 
-    catch (error) {
-      console.error('Error fetching data:', error);
     }
-  emptyEl.classList.remove('hidden');
+    catch (error) {
+      console.error('Error:', error);
+    }
 
+    emptyEl.classList.remove('hidden');
     spinnerEl.classList.add('hidden');
     spinnerEl1.classList.remove('hidden');
+
   }, 2000);
 };
-
-
-let pets = [];
-let categoryPets= [];
-
 
 
 const loadCardInfo = async () => {
   setTimeout(async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
     const data = await res.json();
-    pets = data.pets; 
+    pets = data.pets;
 
     displayAllPets(pets);
 
     emptyEl.classList.remove('hidden');
     spinnerEl1.classList.remove('hidden');
     spinnerEl.classList.add('hidden');
+
   }, 2000);
 };
 
@@ -108,7 +107,8 @@ const displayAllPets = (petsArray) => {
           <p class="text-sm font-medium">Oops!! Sorry, there is no content here.</p>
         </div>`;
     return;
-  } else {
+  }
+  else {
     cardContainer.classList.add("grid");
   }
 
@@ -128,11 +128,11 @@ const displayAllPets = (petsArray) => {
             </div>
             <hr class="my-2"/>
             <div class="flex gap-3">
-              <button  class="btn text-primary bg-white" onclick="showLikeContent('${image}')">
+              <button  class="btn text-primary bg-white " onclick="showLikeContent('${image}')">
                 <img src="images/like.png" alt="">
               </button>
-              <button id="adopt-btn" onclick="adoptBtn(this)"  class="btn text-primary bg-white">Adopt</button>
-              <button id="details-btn" onclick="loadDetails('${petId}', this)" class="btn text-primary bg-white detail-btn">Details</button>
+              <button id="adopt-btn" onclick="adoptBtn(this)"  class="btn text-primary bg-white hover:bg-[#2a9ca7] hover:text-white">Adopt</button>
+              <button id="details-btn" onclick="loadDetails('${petId}', this)" class="btn text-primary bg-white hover:bg-[#2a9ca7] hover:text-white detail-btn">Details</button>
             </div>
           </div>
         </div>
@@ -146,9 +146,9 @@ const sortPetsByPrice = () => {
   const petsToSort = categoryPets.length ? categoryPets : pets;
   console.log(petsToSort);
 
-  petsToSort.sort((a, b) => a.price - b.price); 
-  
-  displayAllPets(petsToSort); 
+  petsToSort.sort((a, b) => a.price - b.price);
+
+  displayAllPets(petsToSort);
 };
 
 
@@ -156,32 +156,28 @@ const sortPetsByPrice = () => {
 const showLikeContent = (image) => {
   const emptyEl = document.getElementById('empty');
   const div = document.createElement('div');
-  div.classList.add('lg:w-5/12','w-full','float-left','mb-3' ,'lg:m-2')
+  div.classList.add('lg:w-5/12', 'w-full', 'float-left', 'mb-3', 'lg:m-2')
   div.innerHTML = `
         
-          <img src="${image}" alt="" class="rounded-lg">
+          <img src="${image}" alt="" class="rounded-lg border p-2">
           
       `;
   emptyEl.appendChild(div);
 }
 
-// Function to show the details content on button click
-const loadDetails = async (petId, button) => {
+const loadDetails = async (petId) => {
   const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`);
   const data = await res.json();
   displayDetails(data.petData);
-  console.log(data);
 
-  const allDetailButtons = document.querySelectorAll('.detail-btn');
-  allDetailButtons.forEach(btn => btn.classList.remove('active'));
-  button.classList.add('active');
+
 };
 
 const displayDetails = (petData) => {
   const modalContent = document.getElementById('modal-content');
-  const{pet_name,breed,date_of_birth,gender,price,vaccinated_status,pet_details,image}=petData;
-  modalContent.innerHTML=`
+  const { pet_name, breed, date_of_birth, gender, price, vaccinated_status, pet_details, image } = petData;
 
+  modalContent.innerHTML = `
   <img class="rounded-lg w-full" src="${image}" alt="">
       <div class="space-y-3">
         <h2 class="text-2xl font-bold mt-3">${pet_name ? pet_name : 'No data found'}</h2>
@@ -199,20 +195,19 @@ const displayDetails = (petData) => {
         <p class="flex items-center gap-1 text-secondary2 text-sm font-semibold"><img src="images/Frame (3).png" alt=""><span class="text-base font-bold ">Price: </span> ${price ? price : 'No data found'}</p>
         </div>
         </div>
-
         <hr/>
         <p  class="text-xl font-bold mb-4">Pet details:</p>
         <p class="text-sm"> ${pet_details ? pet_details : 'No additional details available'}</p>
     </div>
   `
   document.getElementById('customModal').showModal()
-  
-} 
+
+}
 
 const adoptBtn = (button) => {
 
   const modalAdoptContent = document.getElementById('modal-adopt-content');
-  let countdown = 3; 
+  let countdown = 3;
 
   modalAdoptContent.innerHTML = `
     <div class="text-center">
@@ -228,15 +223,19 @@ const adoptBtn = (button) => {
   document.getElementById('my_modal_2').showModal();
 
   const intervalId = setInterval(() => {
-    countdown--; 
-    document.getElementById('countdown').textContent = countdown; 
+    countdown--;
+    document.getElementById('countdown').textContent = countdown;
     if (countdown === 0) {
       clearInterval(intervalId);
       document.getElementById('my_modal_2').close();
 
-      button.disabled = true; 
+      button.disabled = true;
+      button.textContent = 'Adopted';
+
+
+
     }
-  }, 1000); 
+  }, 1000);
 };
 
 
